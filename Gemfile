@@ -18,6 +18,8 @@ gem 'sqlite3'
 # To use Jbuilder templates for JSON
 gem 'jbuilder'
 
+gem 'bizflow', :path => "~/projects/bizflow"
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

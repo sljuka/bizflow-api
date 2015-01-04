@@ -1,3 +1,8 @@
+PATH
+  remote: ~/projects/bizflow
+  specs:
+    bizflow (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -89,6 +94,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bizflow!
   jbuilder
   rails (= 4.1.1)
   rails-api
