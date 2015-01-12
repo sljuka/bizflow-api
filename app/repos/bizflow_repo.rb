@@ -1,31 +1,15 @@
 class BizflowRepo
 
-  # process
-
-  def create_process(hash)
-    BfProcess.create(hash)
+  def db_path
+    File.expand_path "#{__FILE__}/../../../bizflow_db/bd.db"
   end
 
-  def find_process(id)
-    BfProcess.find(id)
-  end
-
-  def query_processes(hash)
-    BfProcess.where(hash)
-  end
-
-  # task
-
-  def create_task(hash)
-    Task.create(hash)
-  end
-
-  def find_task(id)
-    Task.find(id)
-  end
-
-  def query_tasks(hash)
-    Task.where(hash)
+  def process_wrapers
+    {
+      make_breakfast: MakeBreakfastProcess
+    }
   end
 
 end
+
+puts BizflowRepo.new.db_path

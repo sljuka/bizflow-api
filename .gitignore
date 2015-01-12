@@ -17,3 +17,6 @@
 
 /vendor
 /log
+
+/bizflow_db
+*.db
