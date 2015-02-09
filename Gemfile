@@ -20,6 +20,8 @@ gem 'jbuilder'
 
 gem 'bizflow', :path => "~/projects/bizflow"
 
+gem 'rb-readline'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
