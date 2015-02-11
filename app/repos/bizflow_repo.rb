@@ -8,8 +8,4 @@ class BizflowRepo < Bizflow::Repo
   	Databases[:dev]
   end
 
-  def process_blueprints
-  	Bizflow::Model::ProcessBlueprint.all
-  end
-
 end

@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       resources :users
+      resources :blueprints
       resources :processes
-      resources :process_types
     end
   end
 

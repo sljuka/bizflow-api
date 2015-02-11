@@ -11,44 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150102220531) do
+ActiveRecord::Schema.define(version: 20141225223542) do
 
   create_table "api_keys", force: true do |t|
     t.integer "user_id"
     t.string  "token"
-  end
-
-  create_table "bf_processes", force: true do |t|
-    t.string   "process_type"
-    t.integer  "user_id"
-    t.string   "pid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "process_comments", force: true do |t|
-    t.text     "text"
-    t.integer  "user_id"
-    t.integer  "bf_process_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "projects", force: true do |t|
-    t.string   "name"
-    t.integer  "user_id"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tasks", force: true do |t|
-    t.string   "task_type"
-    t.integer  "user_id"
-    t.integer  "bf_process_id"
-    t.datetime "finished_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
