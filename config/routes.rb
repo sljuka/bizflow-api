@@ -6,7 +6,13 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       resources :blueprints
-      resources :processes
+      
+      resources :processes do
+        post 'run', on: :member
+      end
+
+      resources :tasks
+    
     end
   end
 

@@ -3,6 +3,8 @@ module Api
 
     class BlueprintsController < ApplicationController
 
+      before_filter :restrict_access 
+
       def index
         @processes = BizflowRepo.new.process_blueprints
       end

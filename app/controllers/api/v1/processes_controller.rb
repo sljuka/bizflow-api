@@ -3,21 +3,23 @@ module Api
 
     class ProcessesController < ApplicationController
 
+      before_filter :restrict_access 
+
       def index
-        @started_processes = BizflowRepo.new.started_processes(User.first)
+        @processes = BizflowRepo.new.processes
       end
 
       def show
-        @process = BizflowRepo.find_process(params[:id])
+        @process = BizflowRepo.new.find_process(params[:id])
       end
 
       def create
-        BizflowRepo.create_process(params[:id])
+        @process = BizflowRepo.new.create_process(params[:id], @current_user.id)
       end
 
       def run
-        @process = Bizflow.find_process(params[:id])
-        @process.run
+        @process = BizflowRepo.new.find_process(params[:id])
+        @process.run(@current_user.id)
       end
 
     end
