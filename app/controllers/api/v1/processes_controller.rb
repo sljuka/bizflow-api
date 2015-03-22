@@ -6,7 +6,7 @@ module Api
       before_filter :restrict_access 
 
       def index
-        @processes = BizflowRepo.new.processes
+        @processes = BizflowRepo.new.processes(params[:process_names])
       end
 
       def show

@@ -10,8 +10,6 @@ gem 'spring', :group => :development
 
 gem 'sqlite3'
 
-
-
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
@@ -21,6 +19,8 @@ gem 'jbuilder'
 gem 'bizflow', :path => "~/projects/bizflow"
 
 gem 'rb-readline'
+
+gem 'byebug'
 
 # Use unicorn as the app server
 # gem 'unicorn'

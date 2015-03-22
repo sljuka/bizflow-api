@@ -1,12 +1,9 @@
-json.processes @processes do |p|
+latest_blueprints = {}
+@processes[:blueprints].each { |item| latest_blueprints[item.name] = item.values[:latest] }
+process_hash = @processes[:processes].group_by(&:name)
 
-  json.id p.id
-  json.name p.name
-  if p.created_at.year != Date.today.year
-    json.started_at p.created_at.strftime("%F %H:%M")
-  else
-    json.started_at p.created_at.strftime("%m-%d %H:%M")
-  end
-  json.requester_id "#{p.creator_id}"
-
+json.array! process_hash.each do |k, v|
+	json.name k
+	json.latest latest_blueprints[k]
+	json.processes v
 end

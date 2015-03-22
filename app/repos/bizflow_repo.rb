@@ -1,4 +1,4 @@
-class BizflowRepo < Bizflow::Repo
+class BizflowRepo < Bizflow::Repos::Repo
 
   Databases = {
   	dev: Rails.root.join('bizflow_db', 'bf.db')

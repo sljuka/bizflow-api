@@ -1,8 +1,21 @@
+
 process "make_breakfast" do
 
   description "creates breakfast"
   
-  start_action "get_supplies"
+  start "check_supplies"
+
+  input_action "check_supplies" do
+    
+    description "checks if there are enaugh eggs, bacon and bread"
+    control_input "supply_status", question: "Are there enaugh supplies?"
+
+    next_actions(
+      not_enaugh_supplies: "get_supplies",
+      enaugh_supplies: "make_breakfast"
+    )
+
+  end
 
   task_action "get_supplies" do
 
@@ -17,21 +30,21 @@ process "make_breakfast" do
 
   task_action "make_breakfast" do
 
-    description "make eggs and bacon"
-    task "make_breakfast", roles: ["storage", "kitchen"], description: "optional description", auto_assign: true
+    description "sets stove, fry eggs, roast bacon"
+    task "make_breakfast", roles: ["kitchen"]
 
-    next_action "make_breakfast"
-
+    next_action "serve_breakfast"
+    
   end
 
   task_action "serve_breakfast" do
 
-    description "prepare table, slice bread"
     task "prepare_table", roles: ["servers"]
     task "slice_bread", roles: ["kitchen"]
 
     next_action "process:finish"
 
   end
+
 
 end
