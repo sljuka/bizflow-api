@@ -18,8 +18,8 @@ module Api
       end
 
       def run
-        @process = BizflowRepo.new.find_process(params[:id])
-        @process.run(@current_user.id)
+        @process = BizflowRepo.new.run_process(params[:id], @current_user.id)
+        render
       end
 
     end
