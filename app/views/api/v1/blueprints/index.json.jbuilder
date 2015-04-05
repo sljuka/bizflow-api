@@ -1,5 +1,5 @@
-json.array! @processes.each do |process|
-	json.id process.id
-	json.name process.name
-	json.description process.description
+json.array! @blueprints.each do |bp|
+	json.id bp.id
+	json.name bp.name
+	json.description bp.description
 end

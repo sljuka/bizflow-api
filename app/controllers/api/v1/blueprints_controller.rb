@@ -6,7 +6,13 @@ module Api
       before_filter :restrict_access 
 
       def index
-        @processes = BizflowRepo.new.process_blueprints
+
+        query = BizflowRepo.new.blueprints
+        query = query.where(name: params[:names]) if params[:names]
+        query = query.group(:name).order(Sequel.desc(:id)) if params[:latest]
+
+        @blueprints = query.all
+
       end
 
     end

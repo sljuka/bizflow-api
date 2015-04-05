@@ -1,7 +1,7 @@
 
-process "sample_process" do
+process "sample_process_2" do
 
-  description "sample_process"
+  description "sample_process_2"
   
   start "action_1"
 
@@ -10,7 +10,7 @@ process "sample_process" do
     description "1st action"
     task "first_task_1", roles: ["storage", "kitchen"], description: "optional description", auto_assign: true
     task "first_task_2", roles: ["storage", "kitchen"]
-    task "first_task_3", roles: ["storage"]
+    task "first_task_2", roles: ["storage"]
 
     next_action "action_2"
 

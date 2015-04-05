@@ -1,9 +1,9 @@
-latest_blueprints = {}
-@processes[:blueprints].each { |item| latest_blueprints[item.name] = item.values[:latest] }
-process_hash = @processes[:processes].group_by(&:name)
+grouped_processes = @processes.group_by(&:name)
 
-json.array! process_hash.each do |k, v|
-	json.name k
-	json.latest latest_blueprints[k]
-	json.processes v
+json.array! @blueprints.each do |bp|
+	json.name bp.name
+	json.humanName bp.name.humanize
+	json.id bp.id
+	json.description bp.description
+	json.processes grouped_processes[bp.name] || []
 end
