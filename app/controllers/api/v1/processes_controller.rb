@@ -9,8 +9,9 @@ module Api
         blueprints_query = BizflowRepo.new.blueprints.group(:name)
         processes_query = BizflowRepo.new.processes.order(Sequel.desc(:id))
         if params[:names]
-          blueprints_query = blueprints_query.where(name: params[:names])
-          processes_query = processes_query.where(name: params[:names]).order(Sequel.desc(:id)).all
+          names = JSON.parse(params[:names])
+          blueprints_query = blueprints_query.where(name: names)
+          processes_query = processes_query.where(name: names).order(Sequel.desc(:id))
         end
 
         @blueprints = blueprints_query.all
