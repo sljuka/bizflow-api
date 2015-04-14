@@ -4,14 +4,21 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
-      resources :users
+      resources :users do
+        get 'login_info', on: :collection
+      end
+
       resources :blueprints
       
       resources :processes do
         post 'run', on: :member
+        post 'input', on: :member
       end
 
-      resources :tasks
+      resources :tasks do
+        post 'assign', on: :member
+        post 'finish', on: :member
+      end
     
     end
   end

@@ -26,5 +26,24 @@ json.array! @blueprints.each do |bp|
     json.runned_at p.runned_at          
     json.runner_id p.runner_id
     json.status status
+
+    a = p.current
+    if a
+      json.current do
+        json.id a.id
+        json.name a.name
+        json.human_name a.name.humanize
+        json.process_id a.process_id
+        json.description a.description
+        json.question a.question
+        json.type a.type
+        json.following a.next_actions.each do |flw|
+          json.name flw.ending
+          json.human_name flw.ending.try(:humanize)
+          json.id flw.id
+        end
+      end
+    end
+
   end
 end
