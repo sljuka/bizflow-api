@@ -1,13 +1,11 @@
 if @user
 	json.message "good credentials"
-	json.error false
-	json.error_message false
 	json.data do	
 		json.id @user.id
 		json.username @user.username
 		json.first_name @user.first_name
 		json.last_name @user.last_name
-		json.api_key @user.api_key
+		json.api_key @user.api_key.token
 	end
 else
 	json.message "bad credentials"
