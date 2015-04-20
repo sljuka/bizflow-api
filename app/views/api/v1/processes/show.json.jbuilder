@@ -1,4 +1,4 @@
-p = @process
+p = @result
 
 status = "not_started"
 status = p.current.type if p.current

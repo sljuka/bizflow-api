@@ -19,23 +19,56 @@ module Api
       end
 
       def show
-        @process = BizflowRepo.new.processes[params[:id]]
+        @result = BizflowRepo.new.processes[params[:id]]
       end
 
       def create
-        @process = BizflowRepo.new.create_process(params[:id], @current_user.id)
+        @result = BizflowRepo.new.create_process(params[:id], @current_user.id)
       end
 
       def run
-        @process = BizflowRepo.new.run_process(params[:id], @current_user.id)
-        render
+        repo = BizflowRepo.new
+        process = repo.processes[params[:id]]
+        repo.connection.transaction do 
+          
+          Bizflow::BusinessModel::Process.wrap(process).start(@current_user.id) do |on|
+
+            on.success { |res|
+              @result = res
+              render
+            }
+
+            on.already_started { |res|
+              @result = res
+              render status: 422
+            }
+
+          end
+
+        end
       end
 
       def input
-        @process = BizflowRepo.new.processes[params[:id]]
-        action = Bizflow::BusinessModel::InputAction.wrap(@process.current)
-        action.submit_input(params[:input])
-        render
+        process = BizflowRepo.new.processes[params[:id]]
+        action = Bizflow::BusinessModel::InputAction.wrap(process.current)
+        action.submit_input(params[:input]) do |on|
+
+          on.bad_input { |res|
+            @result = res
+            render status: 422
+          }
+
+          on.not_active { |res|
+            @render = res
+            render status: 422
+          }
+
+          on.success { |res|
+            @result = res
+            render
+          }
+
+        end
       end
 
     end

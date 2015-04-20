@@ -1,1 +1,2 @@
-json.status "ok"
+json.message @result[:message]
+json.data @result[:data]
