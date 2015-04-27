@@ -9,8 +9,22 @@ Its features are:
 
 This is a Rails app. To install run these commands in the project root:
 
+```bash
 $ bundle install
+```
+
+```bash
 $ rake db:migrate
+```
+
+```bash
 $ bundle exec bizflow install
+```
+
+```bash
 $ bundle exec bizflow setup
+```
+
+```bash
 $ bundle exec bizflow build
+```
