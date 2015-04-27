@@ -1,28 +1,16 @@
-== README
+# Bizflow-api
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Bizflow-api is software for managing business processes online. It uses bizflow library and wraps the library logic into a web app (web service).
 
-Things you may want to cover:
+Its features are:
+ - API calls to bizflow library
+ - Restricting access
+ - API versioning
 
-* Ruby version
+This is a Rails app. To install run these commands in the project root:
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+$ bundle install
+$ rake db:migrate
+$ bundle exec bizflow install
+$ bundle exec bizflow setup
+$ bundle exec bizflow build
