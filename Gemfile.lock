@@ -1,10 +1,3 @@
-PATH
-  remote: ~/projects/bizflow
-  specs:
-    bizflow (0.0.1)
-      sequel
-      sqlite3 (~> 1.3.10)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -35,11 +28,60 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    bizflow (0.0.1)
+      sequel
+      sqlite3 (~> 1.3.10)
     builder (3.2.2)
     byebug (4.0.3)
       columnize (= 0.9.0)
+    capistrano (3.4.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (~> 1.3)
+    capistrano-bundler (1.1.4)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-rails (1.1.3)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rbenv (2.0.3)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
+    capybara (2.4.4)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    childprocess (0.5.6)
+      ffi (~> 1.0, >= 1.0.11)
+    colorize (0.7.7)
     columnize (0.9.0)
+    cucumber (1.3.19)
+      builder (>= 2.1.2)
+      diff-lcs (>= 1.1.3)
+      gherkin (~> 2.12)
+      multi_json (>= 1.7.5, < 2.0)
+      multi_test (>= 0.1.2)
+    cucumber-rails (1.4.2)
+      capybara (>= 1.1.2, < 3)
+      cucumber (>= 1.3.8, < 2)
+      mime-types (>= 1.16, < 3)
+      nokogiri (~> 1.5)
+      rails (>= 3, < 5)
+    daemons (1.2.2)
+    database_cleaner (1.4.1)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
+    eventmachine (1.0.7)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
+    ffi (1.9.8)
+    gherkin (2.12.2)
+      multi_json (~> 1.3)
     hike (1.2.3)
     i18n (0.7.0)
     jbuilder (2.2.6)
@@ -50,8 +92,15 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
+    mini_portile (0.6.2)
     minitest (5.5.0)
     multi_json (1.10.1)
+    multi_test (0.1.2)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.2)
+    nokogiri (1.6.6.2)
+      mini_portile (~> 0.6.0)
     polyglot (0.3.5)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -76,7 +125,32 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rb-readline (0.5.2)
-    sequel (4.18.0)
+    rspec-core (3.2.3)
+      rspec-support (~> 3.2.0)
+    rspec-expectations (3.2.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-mocks (3.2.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-rails (3.2.1)
+      actionpack (>= 3.0, < 4.3)
+      activesupport (>= 3.0, < 4.3)
+      railties (>= 3.0, < 4.3)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
+      rspec-support (~> 3.2.0)
+    rspec-support (3.2.2)
+    rubyzip (1.1.7)
+    selenium-webdriver (2.45.0)
+      childprocess (~> 0.5)
+      multi_json (~> 1.0)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
+    sequel (4.22.0)
+    shoulda-matchers (2.8.0)
+      activesupport (>= 3.0.0)
     spring (1.2.0)
     sprockets (2.12.3)
       hike (~> 1.2)
@@ -88,6 +162,14 @@ GEM
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
     sqlite3 (1.3.10)
+    sshkit (1.7.1)
+      colorize (>= 0.7.0)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
+    thin (1.6.3)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0)
+      rack (~> 1.0)
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
@@ -96,16 +178,28 @@ GEM
       polyglot (>= 0.3.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    websocket (1.2.2)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  bizflow!
+  bizflow
   byebug
+  capistrano-rails
+  capistrano-rbenv (~> 2.0)
+  cucumber-rails
+  database_cleaner
+  factory_girl_rails
   jbuilder
   rails (= 4.1.1)
   rails-api
   rb-readline
+  rspec-rails
+  selenium-webdriver
+  shoulda-matchers
   spring
   sqlite3
+  thin

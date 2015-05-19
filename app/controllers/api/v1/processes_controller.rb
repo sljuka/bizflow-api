@@ -6,8 +6,8 @@ module Api
       before_filter :restrict_access 
 
       def index
-        blueprints_query = BizflowRepo.new.blueprints.group(:name)
-        processes_query = BizflowRepo.new.processes.order(Sequel.desc(:id))
+        blueprints_query = Bizflow::DataModel::ProcessBlueprint.group(:name)
+        processes_query = Bizflow::DataModel::Process.order(Sequel.desc(:id))
         if params[:names]
           names = JSON.parse(params[:names])
           blueprints_query = blueprints_query.where(name: names)
@@ -19,17 +19,16 @@ module Api
       end
 
       def show
-        @result = BizflowRepo.new.processes[params[:id]]
+        @result = Bizflow::DataModel::ProcessBlueprint[params[:id]]
       end
 
       def create
-        @result = BizflowRepo.new.create_process(params[:id], @current_user.id)
+        @result = Bizflow::BusinessModel::Process.create_process(params[:id], @current_user.id)
       end
 
       def run
-        repo = BizflowRepo.new
-        process = repo.processes[params[:id]]
-        repo.connection.transaction do 
+        process = Bizflow::DataModel::Process[params[:id]]
+        Bizflow::Repos::Repo.connection.transaction do 
           
           Bizflow::BusinessModel::Process.wrap(process).start(@current_user.id) do |on|
 

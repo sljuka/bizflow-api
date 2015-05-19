@@ -19,8 +19,7 @@ json.array! @blueprints.each do |bp|
     json.creator_id p.creator_id           
     json.description p.description             
     json.finished_at p.finished_at             
-    json.id p.id              
-    json.jumped_at p.jumped_at             
+    json.id p.id        
     json.pid p.pid             
     json.process_blueprint_id p.process_blueprint_id
     json.runned_at p.runned_at          
