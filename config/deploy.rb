@@ -11,8 +11,6 @@ set :rbenv_ruby, '2.2.2'
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/home/deploy/apps/bizflow-api'
 
-set :rbenv_custom_path, '/home/deploy/.rbenv/'
-
 # Default value for :scm is :git
 # set :scm, :git
 
@@ -49,7 +47,7 @@ namespace :deploy do
     on roles(:app) do
       execute :mkdir, '-p', current_path.join('tmp')
       execute :touch, current_path.join('tmp/restart.txt')
-      execute "cd /home/deploy/apps/bizflow-api/current && bundle exec bizflow migrate"
+      execute "cd /home/deploy/apps/bizflow-api/current && /home/deploy/.rbenv/shims/bundle exec bizflow migrate"
     end
   end
 
