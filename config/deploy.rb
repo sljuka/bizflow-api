@@ -44,7 +44,7 @@ namespace :deploy do
       execute :mkdir, '-p', current_path.join('tmp')
       execute :touch, current_path.join('tmp/restart.txt')
       execute :cd, current_path
-      execute :bundle, 'exec bizflow migrate'
+      execute :bizflow, 'migrate'
     end
   end
 
