@@ -43,7 +43,6 @@ namespace :deploy do
     on roles(:app) do
       execute :mkdir, '-p', current_path.join('tmp')
       execute :touch, current_path.join('tmp/restart.txt')
-      execute :cd, current_path
       execute :bizflow, 'migrate'
     end
   end
