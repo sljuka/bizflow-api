@@ -39,6 +39,7 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app) do
+      execute :bundle, 'exec bizflow migrate'
       execute :mkdir, '-p', current_path.join('tmp')
       execute :touch, current_path.join('tmp/restart.txt')
     end

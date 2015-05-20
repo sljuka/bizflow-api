@@ -28,7 +28,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
-    bizflow (0.0.1)
+    bizflow (0.0.2)
       sequel
       sqlite3 (~> 1.3.10)
     builder (3.2.2)
