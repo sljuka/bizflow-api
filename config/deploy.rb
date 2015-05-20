@@ -44,7 +44,7 @@ namespace :deploy do
     on roles(:app) do
       execute :mkdir, '-p', current_path.join('tmp')
       execute :touch, current_path.join('tmp/restart.txt')
-      execute :bizflow, 'migrate'
+      execute "cd /home/deploy/apps/bizflow-api/current/ && bundle exec bizflow migrate"
     end
   end
 
