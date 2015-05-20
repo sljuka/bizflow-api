@@ -34,6 +34,7 @@ set :bundle_binstubs, -> { current_path.join('bin') }
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :default_env, { path: '$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH' }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
