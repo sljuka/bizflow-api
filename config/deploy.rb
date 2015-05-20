@@ -11,6 +11,8 @@ set :rbenv_ruby, '2.2.2'
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/home/deploy/apps/bizflow-api'
 
+set :rbenv_custom_path, '/home/deploy/.rbenv/'
+
 # Default value for :scm is :git
 # set :scm, :git
 
