@@ -6,9 +6,9 @@ module Api
       before_filter :restrict_access 
 
       def index
-        query = Bizflow::DataModel::ProcessBlueprint
+        query = Bizflow::DataModel::ProcessBlueprint.group(:name)
         query = query.where(name: params[:names]) if params[:names]
-        query = query.group(:name).order(Sequel.desc(:id)) if params[:latest]
+        query = query.order(Sequel.desc(:id)) if params[:latest]
         @blueprints = query.all
       end
 

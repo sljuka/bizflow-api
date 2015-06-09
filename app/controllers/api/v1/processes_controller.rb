@@ -19,7 +19,7 @@ module Api
       end
 
       def show
-        @result = Bizflow::DataModel::ProcessBlueprint[params[:id]]
+        @result = Bizflow::DataModel::Process[params[:id]]
       end
 
       def create
