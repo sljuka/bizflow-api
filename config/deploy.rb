@@ -29,8 +29,14 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'bizflow_db')
 
+set :bundle_bins, fetch(:bundle_bins, []).push('bizflow')
+set :bundle_binstubs, -> { current_path.join('bin') }
+
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :default_env, {
+  path: '/home/deploy/.rbenv/shims:/home/deploy/.rbenv/bin:$PATH'
+}
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
@@ -41,6 +47,7 @@ namespace :deploy do
     on roles(:app) do
       execute :mkdir, '-p', current_path.join('tmp')
       execute :touch, current_path.join('tmp/restart.txt')
+      execute "cd /home/deploy/apps/bizflow-api/current && /home/deploy/.rbenv/shims/bundle exec bizflow migrate"
     end
   end
 
