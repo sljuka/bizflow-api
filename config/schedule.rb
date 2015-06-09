@@ -8,7 +8,7 @@
 # set :output, "/path/to/my/cron_log.log"
 #
 
-every hours do
+every :hour do
   echo "restoring default database state..."
   rake "refresh:database"
   echo "default database state restored"
