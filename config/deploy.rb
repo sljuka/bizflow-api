@@ -45,9 +45,10 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app) do
+      execute "cd /home/deploy/apps/bizflow-api/current && /home/deploy/.rbenv/shims/bundle exec bizflow migrate production"
+      execute "cd /home/deploy/apps/bizflow-api/current && /home/deploy/.rbenv/shims/bundle exec bizflow build production"
       execute :mkdir, '-p', current_path.join('tmp')
       execute :touch, current_path.join('tmp/restart.txt')
-      execute "cd /home/deploy/apps/bizflow-api/current && /home/deploy/.rbenv/shims/bundle exec bizflow migrate production"
     end
   end
 
