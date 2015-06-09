@@ -9,9 +9,9 @@
 #
 
 every :hour do
-  echo "restoring default database state..."
+  command "echo 'restoring default database state...'"
   rake "refresh:database"
-  echo "default database state restored"
+  command "echo 'default database state restored'"
 end
 
 #
