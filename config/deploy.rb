@@ -40,7 +40,9 @@ set :default_env, {
 
 namespace :rbenv do
   task :rehash do
-    execute :rbenv, 'rehash'
+    on roles(:app) do
+      execute :rbenv, 'rehash'
+    end
   end
 end
 
