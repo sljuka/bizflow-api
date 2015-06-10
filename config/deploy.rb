@@ -38,6 +38,10 @@ set :default_env, {
   path: "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
 }
 
+set :default_environment, {
+    'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
+}
+
 namespace :rbenv do
   task :rehash do
     on roles(:app) do
