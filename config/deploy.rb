@@ -38,6 +38,12 @@ set :default_env, {
   path: '/home/deploy/.rbenv/shims:/home/deploy/.rbenv/bin:$PATH'
 }
 
+namespace :rbenv do
+  task :rehash do
+    run 'rbenv rehash'
+  end
+end
+
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 namespace :deploy do
@@ -45,8 +51,10 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app) do
-      execute "cd /home/deploy/apps/bizflow-api/current && /home/deploy/.rbenv/shims/bundle exec bizflow migrate production"
-      execute "cd /home/deploy/apps/bizflow-api/current && /home/deploy/.rbenv/shims/bundle exec bizflow build production"
+      # execute "cd #{current_path} && /home/deploy/.rbenv/shims/bundle exec bizflow migrate production"
+      # execute "cd #{current_path} && /home/deploy/.rbenv/shims/bundle exec bizflow build production"
+      execute "cd #{current_path} && bundle exec bizflow migrate production"
+      execute "cd #{current_path} && bundle exec bizflow build production"
       execute :mkdir, '-p', current_path.join('tmp')
       execute :touch, current_path.join('tmp/restart.txt')
     end
@@ -54,5 +62,6 @@ namespace :deploy do
 
 end
 
+after "deploy:bundle", "rbenv:rehash"
 after "deploy:publishing", "deploy:migrate"
 after "deploy:publishing", "deploy:restart"
