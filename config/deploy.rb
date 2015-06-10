@@ -32,15 +32,18 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 set :bundle_bins, fetch(:bundle_bins, []).push('bizflow')
 set :bundle_binstubs, -> { current_path.join('bin') }
 
+set :whenever_environment, defer { stage }
+set :whenever_command, 'bundle exec whenever'
+
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :default_env, {
   path: "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
 }
 
-set :default_environment, {
-    'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
-}
+# set :default_environment, {
+#     'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
+# }
 
 namespace :rbenv do
   task :rehash do
@@ -57,8 +60,6 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app) do
-      # execute "cd #{current_path} && /home/deploy/.rbenv/shims/bundle exec bizflow migrate production"
-      # execute "cd #{current_path} && /home/deploy/.rbenv/shims/bundle exec bizflow build production"
       execute "cd #{current_path} && bundle exec bizflow migrate production"
       execute "cd #{current_path} && bundle exec bizflow build production"
       execute :mkdir, '-p', current_path.join('tmp')
