@@ -44,7 +44,7 @@ set :default_environment, {
 
 namespace :rbenv do
   task :rehash do
-    on roles(:app) do
+    on roles(:web, :app, :db) do
       execute :rbenv, 'rehash'
     end
   end
@@ -57,10 +57,8 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app) do
-      # execute "cd #{current_path} && /home/deploy/.rbenv/shims/bundle exec bizflow migrate production"
-      # execute "cd #{current_path} && /home/deploy/.rbenv/shims/bundle exec bizflow build production"
-      execute "cd #{current_path} && bundle exec bizflow migrate production"
-      execute "cd #{current_path} && bundle exec bizflow build production"
+      execute "cd #{current_path} && /home/deploy/.rbenv/shims/bundle exec bizflow migrate production"
+      execute "cd #{current_path} && /home/deploy/.rbenv/shims/bundle exec bizflow build production"
       execute :mkdir, '-p', current_path.join('tmp')
       execute :touch, current_path.join('tmp/restart.txt')
     end
