@@ -32,8 +32,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 set :bundle_bins, fetch(:bundle_bins, []).push('bizflow')
 set :bundle_binstubs, -> { current_path.join('bin') }
 
-set :whenever_environment, defer { stage }
-set :whenever_command, 'bundle exec whenever'
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
