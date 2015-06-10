@@ -62,6 +62,6 @@ namespace :deploy do
 
 end
 
-after "deploy:bundle", "rbenv:rehash"
-after "deploy:publishing", "deploy:migrate"
-after "deploy:publishing", "deploy:restart"
+after "deploy:publishing", "rbenv:rehash"
+after "deploy:updated", "deploy:migrate"
+after "deploy:published", "deploy:restart"
