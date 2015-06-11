@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408105427) do
+ActiveRecord::Schema.define(version: 20150610174005) do
 
   create_table "api_keys", force: true do |t|
     t.integer "user_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150408105427) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
+    t.string   "password_digest"
   end
 
 end
