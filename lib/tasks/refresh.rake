@@ -7,7 +7,8 @@ namespace :refresh do
     if(User.any?)
       user = User.first
     else
-      user = User.create(email: "test@bizflow.com", username: "test", password: "test")
+      user = User.new(email: "test@bizflow.com", username: "test", password: "test")
+      user.save
     end
 
     Bizflow::DataModel::Task.dataset.delete
