@@ -1,2 +1,7 @@
+process = @result[:data].action.process.reload
 json.message @result[:message]
-json.data @result[:data]
+json.data do
+  json.process do
+    json.partial! 'api/v1/processes/process', process: process
+  end
+end

@@ -48,7 +48,7 @@ module Api
       end
 
       def input
-        process = BizflowRepo.new.processes[params[:id]]
+        process = Bizflow::DataModel::Process[params[:id]]
         action = Bizflow::BusinessModel::InputAction.wrap(process.current)
         action.submit_input(params[:input]) do |on|
 

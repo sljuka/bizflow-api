@@ -6,7 +6,7 @@ module Api
       before_filter :restrict_access 
 
       def assign
-      	task = BizflowRepo.new.tasks[params[:id]]
+      	task = Bizflow::DataModel::Task[params[:id]]
       	task = Bizflow::BusinessModel::Task.wrap(task)
       	task.assign(@current_user.id) do |on|
 
@@ -23,7 +23,7 @@ module Api
       end
 
       def finish
-      	task = BizflowRepo.new.tasks[params[:id]]
+      	task = Bizflow::DataModel::Task[params[:id]]
       	task = Bizflow::BusinessModel::Task.wrap(task)
       	task.finish(@current_user.id) do |on|
 
