@@ -19,12 +19,41 @@ namespace :refresh do
 
     builder = Bizflow::Lib::ProcessBuilder.new
 
-    blueprint = Bizflow::DataModel::ProcessBlueprint.first
-    builder.build(blueprint.id, user.id)
-    builder.build(blueprint.id, user.id)
-    builder.build(blueprint.id, user.id)
+    blueprints = Bizflow::DataModel::ProcessBlueprint.first(4)
 
-    puts Bizflow::DataModel::Process.count
+    process1 = builder.build(blueprints[0].id, user.id)
+    process2 = builder.build(blueprints[0].id, user.id)
+    process3 = builder.build(blueprints[0].id, user.id)
+
+    process1.start(user.id) do |on|
+      on.success { |res| }
+      on.already_started { |res| }
+    end
+
+    process1 = builder.build(blueprints[1].id, user.id)
+    process2 = builder.build(blueprints[1].id, user.id)
+    process3 = builder.build(blueprints[1].id, user.id)    
+
+    process1.start(user.id) do |on|
+      on.success { |res| }
+      on.already_started { |res| }
+    end
+
+    process2.start(user.id) do |on|
+      on.success { |res| }
+      on.already_started { |res| }
+    end
+
+    process1 = builder.build(blueprints[2].id, user.id)
+    process2 = builder.build(blueprints[2].id, user.id)
+
+    process1 = builder.build(blueprints[3].id, user.id)
+    process2 = builder.build(blueprints[3].id, user.id)
+
+    process2.start(user.id) do |on|
+      on.success { |res| }
+      on.already_started { |res| }
+    end
 
     puts "restoring finished #{Rails.env} ** #{Bizflow::DataModel::Process.all}"
 
